@@ -1,0 +1,12 @@
+*.exr
+*.pth
+
+venv/
+env/
+.env/
+__pycache__/
+*.__pycache__
+
+.vscode/
+Thumbs.db
+.DS_Store
