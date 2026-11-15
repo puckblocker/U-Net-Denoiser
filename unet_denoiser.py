@@ -77,7 +77,7 @@ def main():
         optimizer.step() # changes weights
 
         # LOSS REPORT
-        if epoch % 10 == 0:
+        if epoch % 20 == 0:
             psnr = psnrFunction(lossMSE, yTrain)
             print(f"Epoch: {epoch} | Total Loss: {loss.item():.5f} | Current PSNR: {psnr.item():.2f}")
 
@@ -204,11 +204,15 @@ def GrabPatches(files):
 
         # GRAB PATCH FOR NOISY AND GROUND TRUTH
         fullTruthBuffer = truthCache[crntScene]
-        randY = random.randint(0,656)
-        randX = random.randint(0,1226)
+        patchSize = 256
+        maxY = fullNoisyBuffer.shape[0]
+        maxX = fullNoisyBuffer.shape[1]
 
-        noisyPatch = fullNoisyBuffer[randY: randY + 64, randX: randX + 64]
-        truthPatch = fullTruthBuffer[randY: randY + 64, randX: randX + 64]
+        randY = random.randint(0,maxY - patchSize)
+        randX = random.randint(0,maxX - patchSize)
+
+        noisyPatch = fullNoisyBuffer[randY: randY + patchSize, randX: randX + patchSize]
+        truthPatch = fullTruthBuffer[randY: randY + patchSize, randX: randX + patchSize]
 
         finalNoisyPatches.append(noisyPatch)
         finalTruthPatches.append(truthPatch)
