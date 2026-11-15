@@ -44,12 +44,6 @@ def main():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')   # use cuda, if not use cpu
     print(f"Training with: {device}")
 
-    # PREPOCESS DATA & MOVE DATA TO GPU
-    xInput, yInput = GrabPatches(files)
-    xTrain = torch.from_numpy(xInput).float().to(device)
-    yTrain = torch.from_numpy(yInput).float().to(device)
-    yTrain = yTrain[:, :3, :, :]
-
     # SETUP U-NET
     model = UNet(inChannels=16, outChannels=3).to(device)   # actual model
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
@@ -58,6 +52,12 @@ def main():
     # TRAINING LOOP
     epochs = 200
     for epoch in range(epochs):
+        # PREPOCESS DATA & MOVE DATA TO GPU
+        xInput, yInput = GrabPatches(files)
+        xTrain = torch.from_numpy(xInput).float().to(device)
+        yTrain = torch.from_numpy(yInput).float().to(device)
+        yTrain = yTrain[:, :3, :, :]
+
         # RESET OPTIMIZER
         optimizer.zero_grad()
 
