@@ -219,8 +219,8 @@ def GrabPatches(files):
     xTrain = np.transpose(xTrain, (0, 3, 1, 2))
     yTrain = np.transpose(yTrain, (0, 3, 1, 2))
 
-    print(f"Final Truth Shape: {yTrain}")
-    print(f"Final Noisy Shape: {xTrain}")
+    print(f"Final Truth Shape: {yTrain.shape}")
+    print(f"Final Noisy Shape: {xTrain.shape}")
 
     return xTrain, yTrain
 
