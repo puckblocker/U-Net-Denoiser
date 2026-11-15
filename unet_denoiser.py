@@ -56,7 +56,7 @@ def main():
     print(f"Training Starting...")
 
     # TRAINING LOOP
-    epochs = 500
+    epochs = 200
     for epoch in range(epochs):
         # RESET OPTIMIZER
         optimizer.zero_grad()
